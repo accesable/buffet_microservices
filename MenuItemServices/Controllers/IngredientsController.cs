@@ -196,12 +196,15 @@ namespace MenuItemServices.Controllers
                 .Include(oi => oi.Order)
                 .Include(oi => oi.Ingredient_Stock)
                     .ThenInclude(i => i.Ingredient)
+                .Include(oi => oi.Ingredient_Stock)
+                    .ThenInclude(i => i.Stock)
                 .Select(oi => new 
                 {
                     oi.Id,
                     oi.UsedQuantity,
                     OrderCreatedAt = oi.Order.CreatedAt,
                     IngredientStockId = oi.Ingredient_Stock.Id,
+                    StockId = oi.Ingredient_Stock.StockId,
                     IngredientName = oi.Ingredient_Stock.Ingredient.IngredientName
                 });
 
